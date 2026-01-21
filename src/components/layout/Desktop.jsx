@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, cloneElement } from 'react';
 import MenuBar from './MenuBar';
 import Dock from './Dock';
 import Window from '../os/Window';
@@ -68,7 +68,7 @@ const Desktop = () => {
               onMinimize={() => minimizeWindow(win.id)}
               onFocus={() => focusWindow(win.id)}
             >
-              {win.component}
+              {cloneElement(win.component, { onClose: () => closeWindow(win.id) })}
             </Window>
           )
         ))}

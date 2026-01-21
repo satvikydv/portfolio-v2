@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const Terminal = () => {
+const Terminal = ({ onClose }) => {
   const [history, setHistory] = useState([
     { type: 'output', content: 'Welcome to Portfolio OS v1.0.0' },
     { type: 'output', content: 'Type "help" for available commands.' },
@@ -20,7 +20,7 @@ const Terminal = () => {
       let output = '';
       switch (cmd) {
         case 'help':
-          output = 'Available commands: help, clear, about, skills, contact';
+          output = 'Available commands: help, clear, about, skills, contact, exit';
           break;
         case 'about':
           output = 'I am a passionate developer building cool things on the web.';
@@ -34,6 +34,10 @@ const Terminal = () => {
         case 'clear':
           setHistory([]);
           setInput('');
+          return;
+        case 'exit':
+        case 'quit':
+          if (onClose) onClose();
           return;
         case '':
           break;
